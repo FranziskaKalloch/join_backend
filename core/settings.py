@@ -27,7 +27,6 @@ INSTALLED_APPS = [
     'drf_spectacular',
     'auth_app.apps.AuthAppConfig',
     'board_app.apps.BoardAppConfig',
-    'contact_app.apps.ContactAppConfig',
     'summary_app.apps.SummaryAppConfig',
     'tasks_app.apps.TasksAppConfig',
     
@@ -44,7 +43,7 @@ SPECTACULAR_SETTINGS = {
     'SERVE_INCLUDE_SCHEMA': False,
 }
 
-AUTH_USER_MODEL = 'aut_app.User'
+AUTH_USER_MODEL = 'auth_app.User'
 
 
 MIDDLEWARE = [
