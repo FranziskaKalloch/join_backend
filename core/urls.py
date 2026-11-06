@@ -9,6 +9,11 @@ from drf_spectacular.views import (
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/', include('auth_app.api.urls')),
+    path('api/', include('contact_app.api.urls')),
+    path('api/', include('board_app.api.urls')),
+    path('api/', include('summary_app.api.urls')),
+    path('api/', include('tasks_app.api.urls')),
     
     # Der OpenAPI-Schema-Endpunkt (JSON/YAML)
     path('api/schema/', SpectacularAPIView.as_view(), name='schema'),

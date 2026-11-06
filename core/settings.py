@@ -25,10 +25,16 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'drf_spectacular',
+    'auth_app.apps.AuthAppConfig',
+    'board_app.apps.BoardAppConfig',
+    'contact_app.apps.ContactAppConfig',
+    'summary_app.apps.SummaryAppConfig',
+    'tasks_app.apps.TasksAppConfig',
+    
 ]
 
 REST_FRAMEWORK = {
-    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.Autoschema',
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
 }
 
 SPECTACULAR_SETTINGS = {
@@ -37,6 +43,9 @@ SPECTACULAR_SETTINGS = {
     'Version': '1.0.0',
     'SERVE_INCLUDE_SCHEMA': False,
 }
+
+AUTH_USER_MODEL = 'aut_app.User'
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
