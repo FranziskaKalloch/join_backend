@@ -16,14 +16,10 @@ class SignUpView(APIView):
         """Validates registration data, creates a user, and returns HTTP 201."""
         serializer = SignUpSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        serializer.save()
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
+        user = serializer.save()
+        full_name = user.get_full_name()
+        return Response({"full_name": full_name, "email": user.email}, status=status.HTTP_201_CREATED)
 
-## Request Fields:
- # first_name
- # last_name
- # email
- # password
 
 class LoginView(APIView):
     pass
