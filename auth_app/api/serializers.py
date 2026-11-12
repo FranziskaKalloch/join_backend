@@ -6,8 +6,8 @@ from ..models import User
 
 class SignUpSerializer(serializers.ModelSerializer):
     """Validates registration data and creates a new user."""
-    password = serializers.CharField(write_only=True, trim_whitespace=True)
-    confirm_password = serializers.CharField(write_only=True, trim_whitespace=True)
+    password = serializers.CharField(write_only=True, trim_whitespace=False, min_length=6)
+    confirm_password = serializers.CharField(write_only=True, trim_whitespace=False, min_length=6)
     full_name = serializers.CharField(max_length=255, write_only=True)
     class Meta:
         model = User
