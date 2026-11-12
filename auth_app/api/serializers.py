@@ -9,9 +9,10 @@ class SignUpSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True, trim_whitespace=False, min_length=6)
     confirm_password = serializers.CharField(write_only=True, trim_whitespace=False, min_length=6)
     full_name = serializers.CharField(max_length=255, write_only=True)
+    privacy_policy = serializers.BooleanField(required=True, write_only=True)
     class Meta:
         model = User
-        fields = ('full_name', 'email', 'password', 'confirm_password')
+        fields = ('full_name', 'email', 'password', 'confirm_password', 'privacy_policy')
         
     
     def validate(self, data):
@@ -21,6 +22,23 @@ class SignUpSerializer(serializers.ModelSerializer):
         
         if len(data['full_name'].split()) < 2:
              raise serializers.ValidationError({"full_name": "Bitte gib Vor- und Nachnamen ein"})
+        
+        first_name, last_name = data["full_name"].split(maxsplit=1) # maxsplit=1 - höchstens einmal aufteilen
+        if len(first_name) > 150:
+            raise serializers.ValidationError({
+                "first_name": "Der Vorname darf maximal 150 Zeichen haben"
+            })
+        
+        if len(last_name) > 150:
+            raise serializers.ValidationError({
+                "last_name": "Der Nachname darf maximal 150 Zeichen haben"
+                })
+        
+        privacy_policy = data['privacy_policy']
+        if privacy_policy != True:
+            raise serializers.ValidationError({
+                "privacy_policy": "Privacy Policy muss ausgewählt werden"
+                })
         
         return data
     
